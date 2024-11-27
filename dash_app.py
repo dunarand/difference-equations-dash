@@ -1,7 +1,6 @@
 import plotly.graph_objects as go
 from dash import Dash, dcc, html, callback_context
 from dash.dependencies import Input, Output, State
-import dash_latex as dl
 
 from difference_model import DifferenceModel
 
@@ -19,7 +18,7 @@ app.layout = html.Div(
                 'font-family': 'Lato, sans-serif',
                 'font-size': '36px',
                 'text-align': 'center',
-                'margin-bottom': '-3px',
+                'margin-bottom': '20px',
                 'margin-top': '-3px'
             }
         ),
@@ -27,7 +26,7 @@ app.layout = html.Div(
             children=[
                 html.Div(
                     children=[
-                        dl.DashLatex(children=r'$a_0$: '),
+                        dcc.Markdown(children=r'$a_0$: ', mathjax=True),
                         dcc.Input(
                             id='input-a0',
                             type='number',
@@ -39,7 +38,7 @@ app.layout = html.Div(
                 ),
                 html.Div(
                     children=[
-                        dl.DashLatex(children=r'$r$: '),
+                        dcc.Markdown(children=r'$r$: ', mathjax=True),
                         dcc.Input(
                             id='input-r',
                             type='number',
@@ -51,7 +50,7 @@ app.layout = html.Div(
                 ),
                 html.Div(
                     children=[
-                        dl.DashLatex(children=r'$b$: '),
+                        dcc.Markdown(children=r'$b$: ', mathjax=True),
                         dcc.Input(
                             id='input-b',
                             type='number',
@@ -63,7 +62,7 @@ app.layout = html.Div(
                 ),
                 html.Div(
                     children=[
-                        dl.DashLatex(children=r'$n$-Start: '),
+                        dcc.Markdown(children=r'$n$-Start: ', mathjax=True),
                         dcc.Input(
                             id='input-start',
                             type='number',
@@ -77,7 +76,7 @@ app.layout = html.Div(
                 ),
                 html.Div(
                     children=[
-                        dl.DashLatex(children=r'$n$-Stop: '),
+                        dcc.Markdown(children=r'$n$-Stop: ', mathjax=True),
                         dcc.Input(
                             id='input-stop',
                             type='number',
@@ -98,39 +97,30 @@ app.layout = html.Div(
                     children=[
                         dcc.Checklist(
                             options=[
-                                {'label': dl.DashLatex(children=r'Fix $a_0$'), 'value': 'keep'},
+                                {'label': 'Fix a0', 'value': 'keep'}
                             ],
                             value=[],
                             id='keep-a0-checkbox',
-                            labelStyle={'display': 'inline-block'}
-                        )
-                    ],
-                    className='input-label'
-                ),
-                html.Div(
-                    children=[
+                            style={'display': 'inline-block', 'margin-right': '20px'}
+                        ),
                         dcc.Checklist(
                             options=[
-                                {'label': dl.DashLatex(children=r'Fix $r$'), 'value': 'keep'},
+                                {'label': 'Fix r', 'value': 'keep'}
                             ],
                             value=[],
                             id='keep-r-checkbox',
-                            labelStyle={'display': 'inline-block'}
-                        )
-                    ],
-                    className='input-label'
-                ),
-                html.Div(
-                    children=[
+                            style={'display': 'inline-block', 'margin-right': '20px'}
+                        ),
                         dcc.Checklist(
                             options=[
-                                {'label': dl.DashLatex(children=r'Fix $b$'), 'value': 'keep'},
+                                {'label': 'Fix b', 'value': 'keep'}
                             ],
                             value=[],
                             id='keep-b-checkbox',
-                            labelStyle={'display': 'inline-block'}
-                        )
+                            style={'display': 'inline-block', 'margin-right': '20px'}
+                        ),
                     ],
+                    style={'display': 'flex', 'align-items': 'center'},
                     className='input-label'
                 ),
             ],
@@ -180,7 +170,7 @@ app.layout = html.Div(
             children=[
                 html.Div(
                     children=[
-                        dl.DashLatex('Graph Title:'),
+                        dcc.Markdown('Graph Title: '),
                         dcc.Input(
                             id='graph-title',
                             type='text',
@@ -192,7 +182,7 @@ app.layout = html.Div(
                 ),
                 html.Div(
                     children=[
-                        dl.DashLatex('X-axis Label:'),
+                        dcc.Markdown('X-axis Label: '),
                         dcc.Input(
                             id='x-axis-label',
                             type='text',
@@ -204,7 +194,7 @@ app.layout = html.Div(
                 ),
                 html.Div(
                     children=[
-                        dl.DashLatex('Y-axis Label:'),
+                        dcc.Markdown('Y-axis Label: '),
                         dcc.Input(
                             id='y-axis-label',
                             type='text',
@@ -217,59 +207,57 @@ app.layout = html.Div(
             ],
             className='input-container'
         ),
-        html.Div(children=[dcc.Markdown('X-axis Limits')], className='input-label'),
+        html.Div(children=[dcc.Markdown('X-axis Limits', className='input-label')],
+                 className='input-container'),
         html.Div(
             children=[
                 html.Div(
                     children=[
-                        dcc.Markdown('Min: '),
+                        dcc.Markdown('Min: ', style={'margin-left': '8px', 'margin-right': '8px'}),
                         dcc.Input(
                             id='xaxis-min',
                             type='number',
                             value=None,
-                            className='numeric-input',
-                            style={'width': '80px'}
+                            className='numeric-input'
                         ),
-                        dcc.Markdown('Max: '),
+                        dcc.Markdown('Max: ', style={'margin-left': '8px', 'margin-right': '8px'}),
                         dcc.Input(
                             id='xaxis-max',
                             type='number',
                             value=None,
-                            className='numeric-input',
-                            style={'width': '80px'}
+                            className='numeric-input'
                         )
                     ],
-                    className='axis-limits-input'
+                    className='input-label'
                 )
             ],
-            className='input-label'
+            className='input-container'
         ),
-        html.Div(children=[dcc.Markdown('Y-axis Limits')], className='input-label'),
+        html.Div(children=[dcc.Markdown('Y-axis Limits', className='input-label')],
+                 className='input-container'),
         html.Div(
             children=[
                 html.Div(
                     children=[
-                        dcc.Markdown('Min: '),
+                        dcc.Markdown('Min: ', style={'margin-left': '8px', 'margin-right': '8px'}),
                         dcc.Input(
                             id='yaxis-min',
                             type='number',
                             value=None,
-                            className='numeric-input',
-                            style={'width': '80px'}
+                            className='numeric-input'
                         ),
-                        dcc.Markdown('Max: '),
+                        dcc.Markdown('Max: ', style={'margin-left': '8px', 'margin-right': '8px'}),
                         dcc.Input(
                             id='yaxis-max',
                             type='number',
                             value=None,
-                            className='numeric-input',
-                            style={'width': '80px'}
+                            className='numeric-input'
                         )
                     ],
-                    className='axis-limits-input'
+                    className='input-label'
                 )
             ],
-            className='input-label'
+            className='input-container'
         ),
         html.Div(
             children=[
@@ -362,7 +350,7 @@ app.layout = html.Div(
 
                                 <div class='markdown-header'>
                                     <strong>Author: </strong><a href="https://github.com/dunarand">dunarand</a><br/>
-                                    <strong> Source Code: </strong><a href="https://github.com/dunarand/difference-models">GitHub</a>
+                                    <strong> Source Code: </strong><a href="https://github.com/dunarand/difference-equations-dash">GitHub</a>
                                 </div>
                                 '''
                             ],
