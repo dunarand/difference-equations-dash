@@ -5,7 +5,7 @@
 The aim of this project was creating interactive visuals of difference models
 with ease.
 
-![](./assets/screencap.gif)
+![](https://github.com/user-attachments/assets/23e06cb2-60b7-48c0-906f-9828c6bf78b7)
 
 ## Getting Started
 
