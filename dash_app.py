@@ -581,4 +581,5 @@ def reset_inputs(new_seq_clicks, reset_clicks, a0, r, b, start, stop, keep_a0, k
             x_axis_label, y_axis_label, xaxis_min, xaxis_max, yaxis_min, yaxis_max)
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=False)
+
